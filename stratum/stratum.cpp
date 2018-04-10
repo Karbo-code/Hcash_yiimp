@@ -143,6 +143,7 @@ YAAMP_ALGO g_algos[] =
 	{"blake2s", blake2s_hash, 1, 0 },
 	{"vanilla", blakecoin_hash, 1, 0 },
 	{"decred", decred_hash, 1, 0 },
+	{"hx", decred_hash, 1, 0 },
 
 	{"deep", deep_hash, 1, 0, 0},
 	{"fresh", fresh_hash, 0x100, 0, 0},
@@ -257,9 +258,9 @@ int main(int argc, char **argv)
 	g_max_shares = iniparser_getint(ini, "STRATUM:max_shares", g_max_shares);
 	g_limit_txs_per_block = iniparser_getint(ini, "STRATUM:max_txs_per_block", 0);
 
-	g_debuglog_client = iniparser_getint(ini, "DEBUGLOG:client", false);
-	g_debuglog_hash = iniparser_getint(ini, "DEBUGLOG:hash", false);
-	g_debuglog_socket = iniparser_getint(ini, "DEBUGLOG:socket", false);
+	g_debuglog_client = iniparser_getint(ini, "DEBUGLOG:client", true);
+	g_debuglog_hash = iniparser_getint(ini, "DEBUGLOG:hash", true);
+	g_debuglog_socket = iniparser_getint(ini, "DEBUGLOG:socket", true);
 	g_debuglog_rpc = iniparser_getint(ini, "DEBUGLOG:rpc", false);
 	g_debuglog_list = iniparser_getint(ini, "DEBUGLOG:list", false);
 	g_debuglog_remote = iniparser_getint(ini, "DEBUGLOG:remote", false);
@@ -413,7 +414,7 @@ void *stratum_thread(void *p)
 	serv.sin_family = AF_INET;
 	serv.sin_addr.s_addr = htonl(INADDR_ANY);
 	serv.sin_port = htons(g_tcp_port);
-
+	debuglog("socket %i port %d\n", listen_sock, g_tcp_port);
 	int res = bind(listen_sock, (struct sockaddr*)&serv, sizeof(serv));
 	if(res < 0) yaamp_error("bind");
 

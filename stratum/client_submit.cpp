@@ -93,6 +93,8 @@ static void create_decred_header(YAAMP_JOB_TEMPLATE *templ, YAAMP_JOB_VALUES *ou
 
 	hexlify(out->header, (const unsigned char*) &header, 180);
 	memcpy(out->header_bin, &header, sizeof(header));
+
+
 }
 
 static void build_submit_values_decred(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB_TEMPLATE *templ,
@@ -100,6 +102,7 @@ static void build_submit_values_decred(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB
 {
 	if (!usegetwork) {
 		// not used yet
+		debuglog("using getwork\n");
 		char doublehash[128] = { 0 };
 
 		sprintf(submitvalues->coinbase, "%s%s%s%s", templ->coinb1, nonce1, nonce2, templ->coinb2);
@@ -115,12 +118,12 @@ static void build_submit_values_decred(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB
 		merkle_hash((char *)coinbase_bin, doublehash, coinbase_len/2);
 
 		string merkleroot = merkle_with_first(templ->txsteps, doublehash);
-		ser_string_be(merkleroot.c_str(), submitvalues->merkleroot_be, 8);
 
-#ifdef MERKLE_DEBUGLOG
-		printf("merkle root %s\n", merkleroot.c_str());
-#endif
+		ser_string_be(merkleroot.c_str(), submitvalues->merkleroot_be, 8);
+		debuglog("merkle root %s\n", merkleroot.c_str());
+
 	}
+	
 	create_decred_header(templ, submitvalues, ntime, nonce, nonce2, vote, usegetwork);
 
 	int header_len = strlen(submitvalues->header)/2;
@@ -267,7 +270,6 @@ static void client_do_submit(YAAMP_CLIENT *client, YAAMP_JOB *job, YAAMP_JOB_VAL
 			memset(hash1, 0, 1024);
 
 			string_be(doublehash2, hash1);
-
 			if(coind->usegetwork && !strcmp("DCR", coind->rpcencoding)) {
 				// no merkle stuff
 				strcpy(hash1, submitvalues->hash_hex);
@@ -378,14 +380,16 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 	if (json_params->u.array.length == 6)
 		strncpy(vote, json_params->u.array.values[5]->u.string.ptr, 7);
 
-	if (g_debuglog_hash) {
-		debuglog("submit %s (uid %d) %d, %s, %s, %s\n", client->sock->ip, client->userid, jobid, extranonce2, ntime, nonce);
-	}
-
+	
 	string_lower(extranonce2);
 	string_lower(ntime);
 	string_lower(nonce);
 	string_lower(vote);
+
+	if (g_debuglog_hash) {
+		debuglog("submit %s (uid %d) jobid %d, extranonce2 %s, ntime %s, nonce%s\n", client->sock->ip, client->userid, jobid, extranonce2, ntime, nonce);
+	}
+
 
 	YAAMP_JOB *job = (YAAMP_JOB *)object_find(&g_list_job, jobid, true);
 	if(!job)
@@ -403,7 +407,6 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 	}
 
 	bool is_decred = job->coind && !strcmp("DCR", job->coind->rpcencoding);
-
 	YAAMP_JOB_TEMPLATE *templ = job->templ;
 
 	if(strlen(nonce) != YAAMP_NONCE_SIZE*2 || !ishexa(nonce, YAAMP_NONCE_SIZE*2)) {
@@ -470,19 +473,27 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 	YAAMP_JOB_VALUES submitvalues;
 	memset(&submitvalues, 0, sizeof(submitvalues));
 
-	if(is_decred)
+	if(is_decred) {
+
 		build_submit_values_decred(&submitvalues, templ, client->extranonce1, extranonce2, ntime, nonce, vote, true);
+	}
 	else
+	{
+		debuglog("normie submit\n");
 		build_submit_values(&submitvalues, templ, client->extranonce1, extranonce2, ntime, nonce);
+	}
 
 	if (templ->height && !strcmp(g_current_algo->name,"lyra2z")) {
 		lyra2z_height = templ->height;
 	}
 
 	// minimum hash diff begins with 0000, for all...
+
 	uint8_t pfx = submitvalues.hash_bin[30] | submitvalues.hash_bin[31];
+	debuglog("header: %s\n\nhash: %s\n\n", submitvalues.header, submitvalues.hash_hex);
 	if(pfx) {
 		if (g_debuglog_hash) {
+			
 			debuglog("Possible %s error, hash starts with %02x%02x%02x%02x\n", g_current_algo->name,
 				(int) submitvalues.hash_bin[31], (int) submitvalues.hash_bin[30],
 				(int) submitvalues.hash_bin[29], (int) submitvalues.hash_bin[28]);

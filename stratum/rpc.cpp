@@ -12,10 +12,10 @@ bool rpc_connect(YAAMP_RPC *rpc)
 {
 	rpc_close(rpc);
 	if(g_exiting) return false;
-
+//GWP
+	
 	struct hostent *ent = gethostbyname(rpc->host);
-	if(!ent) return false;
-
+	if(!ent) return false;	
 	struct sockaddr_in serv;
 
 	serv.sin_family = AF_INET;
@@ -25,7 +25,6 @@ bool rpc_connect(YAAMP_RPC *rpc)
 
 	rpc->sock = socket(AF_INET, SOCK_STREAM, 0);
 	if(rpc->sock <= 0) return false;
-
 	int res = connect(rpc->sock, (struct sockaddr *)&serv, sizeof(serv));
 	if(res < 0)
 	{
@@ -242,7 +241,7 @@ char *rpc_do_call(YAAMP_RPC *rpc, char const *data)
 
 json_value *rpc_call(YAAMP_RPC *rpc, char const *method, char const *params)
 {
-//	debuglog("rpc_call :%d %s\n", rpc->port, method);
+	
 
 #ifdef HAVE_CURL
 	if (rpc->ssl || rpc->curl)
@@ -256,18 +255,24 @@ json_value *rpc_call(YAAMP_RPC *rpc, char const *method, char const *params)
 
 	char *message = (char *)malloc(paramlen+1024);
 	if(!message) return NULL;
+	debuglog("has method  %s\nParams %d", method, params);
 
 	if(params)
+	{
 		sprintf(message, "{\"method\":\"%s\",\"params\":%s,\"id\":\"%d\"}", method, params, ++rpc->id);
-	else
+	}
+	else {
+		
 		sprintf(message, "{\"method\":\"%s\",\"id\":\"%d\"}", method, ++rpc->id);
+	}
+			
 
 	char *buffer = rpc_do_call(rpc, message);
-
 	free(message);
 	if(!buffer) return NULL;
 
 	json_value *json = json_parse(buffer, strlen(buffer));
+
 	if(!json) {
 		debuglog("invalid json: %s", buffer);
 		free(buffer);
@@ -276,11 +281,15 @@ json_value *rpc_call(YAAMP_RPC *rpc, char const *method, char const *params)
 	free(buffer);
 
 	int s2 = current_timestamp();
+
 	if(s2-s1 > 2000)
+	{
 		debuglog("delay rpc_call %s:%d %s in %d ms\n", rpc->host, rpc->port, method, s2-s1);
+	}
 
 	if(json->type != json_object)
 	{
+
 		json_value_free(json);
 		return NULL;
 	}

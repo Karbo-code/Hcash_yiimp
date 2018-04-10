@@ -34,7 +34,6 @@ int main(int argc, char **argv)
 		printf("usage: blocknotify server:port coinid blockhash\n");
 		return 1;
 	}
-
 	int port = atoi(p+1);
 	*p = 0;
 
@@ -60,9 +59,8 @@ int main(int argc, char **argv)
 
 	serv.sin_family = AF_INET;
 	serv.sin_port = htons(port);
-
+	
 	bcopy((char *)ent->h_addr, (char *)&serv.sin_addr.s_addr, ent->h_length);
-
 	int res = connect(sock, (struct sockaddr*)&serv, sizeof(serv));
 	if(res < 0)
 	{
@@ -71,7 +69,7 @@ int main(int argc, char **argv)
 	}
 
 	char buffer[1024];
-	sprintf(buffer, "{\"id\":1,\"method\":\"mining.update_block\",\"params\":[\"tu8tu5\",%d,\"%s\"]}\n", coinid, blockhash);
+	sprintf(buffer, "{\"id\":1,\"method\":\"mining.update_block\",\"params\":[\"LkyAmcUyXhVOvpvjpIvnnGgxqU5PMkij\",%d,\"%s\"]}\n", coinid, blockhash);
 
 	send(sock, buffer, strlen(buffer), 0);
 	close(sock);
