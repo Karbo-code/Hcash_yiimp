@@ -512,9 +512,10 @@ bool coind_create_job(YAAMP_COIND *coind, bool force)
 	if(!templ)
 	{
 		CommonUnlock(&coind->mutex);
-//		debuglog("%s: create job template failed!\n", coind->symbol);
+		//debuglog("%s: create job template failed!\n", coind->symbol);
 		return false;
 	}
+	//debuglog("Template Created\n");
 
 	YAAMP_JOB *job_last = coind->job;
 

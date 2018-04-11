@@ -330,8 +330,8 @@ void job_update()
 	for(CLI li = g_list_job.first; li; li = li->next)
 	{
 		YAAMP_JOB *job = (YAAMP_JOB *)li->data;
-		if(!job_can_mine(job)) continue;
 
+		if(!job_can_mine(job)) continue;
 		job_broadcast(job);
 //		ready++;
 	}
