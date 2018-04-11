@@ -4,6 +4,9 @@ stratum/stratum
 stratum/blocknotify
 blocknotify/blocknotify
 blocknotify-dcr/blocknotify-dcr
+blocknotify-hx/blocknotify-hx
+blocknotify-dcr/vendor/*
+blocknotify-hx/vendor/*
 bin/stratum
 bin/blocknotify
 bin/blocknotify-dcr
@@ -20,3 +23,4 @@ web/assets/
 *.orig
 .idea/*
 web/yaamp/.idea/
+blocknotify-*/vendor/*

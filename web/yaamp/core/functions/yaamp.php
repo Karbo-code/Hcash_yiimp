@@ -77,7 +77,6 @@ function yaamp_algo_mBTC_factor($algo)
 	case 'blakecoin':
 	case 'blake2s':
 	case 'decred':
-	case 'hx':
 	case 'keccak':
 	case 'keccakc':
 	case 'lbry':
@@ -201,7 +200,6 @@ function getAlgoColors($algo)
 function getAlgoPort($algo)
 {
 	$a = array(
-		'hx'		=> 3253,
 		'sha256'	=> 3333,
 		'sha256t'	=> 3339,
 		'lbry'		=> 3334,

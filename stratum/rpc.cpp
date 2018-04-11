@@ -255,16 +255,11 @@ json_value *rpc_call(YAAMP_RPC *rpc, char const *method, char const *params)
 
 	char *message = (char *)malloc(paramlen+1024);
 	if(!message) return NULL;
-	debuglog("has method  %s\nParams %d", method, params);
 
 	if(params)
-	{
 		sprintf(message, "{\"method\":\"%s\",\"params\":%s,\"id\":\"%d\"}", method, params, ++rpc->id);
-	}
-	else {
-		
+	else 
 		sprintf(message, "{\"method\":\"%s\",\"id\":\"%d\"}", method, ++rpc->id);
-	}
 			
 
 	char *buffer = rpc_do_call(rpc, message);

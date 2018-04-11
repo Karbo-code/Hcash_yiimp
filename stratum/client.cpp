@@ -34,7 +34,7 @@ bool client_subscribe(YAAMP_CLIENT *client, json_value *json_params)
 	client->extranonce2size = client->extranonce2size_default;
 
 	// decred uses an extradata field in block header, 2 first uint32 are set by the miner
-	if (g_current_algo->name && (!strcmp(g_current_algo->name,"decred") || !strcmp(g_current_algo->name,"hx")) ){
+	if (g_current_algo->name && !strcmp(g_current_algo->name,"decred"){
 		memset(client->extranonce1, '0', sizeof(client->extranonce1));
 		memcpy(&client->extranonce1[16], client->extranonce1_default, YAAMP_EXTRANONCE2_SIZE*2);
 		client->extranonce1[24] = '\0';
@@ -230,6 +230,7 @@ bool client_authorize(YAAMP_CLIENT *client, json_value *json_params)
 	}
 
 	bool reset = client_initialize_multialgo(client);
+
 	if(reset) return false;
 	client_initialize_difficulty(client);
 
@@ -511,7 +512,6 @@ bool client_auth_by_workers(YAAMP_CLIENT *client)
 
 void *client_thread(void *p)
 {
-		debuglog("notify: ");
 	YAAMP_CLIENT *client = new YAAMP_CLIENT;
 	if(!client) {
 		stratumlog("client_thread OOM");

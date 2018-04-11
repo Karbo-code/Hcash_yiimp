@@ -14,23 +14,20 @@ import (
 	// "path/filepath"
 
 	"bytes" // dcrd > 0.6+
-	"github.com/decred/dcrd/wire"
+	"github.com/hybridnetwork/hxrpcclient"
 
-	"github.com/decred/dcrd/rpcclient"
-//	"github.com/decred/dcrutil"
+	rpcclient "github.com/hybridnetwork/hxrpcclient"
+	//"github.com/hybridnetwork/hxutil"
 )
 
 const (
 	processName = "/var/stratum/blocknotify"    // set the full path if required
-	stratumDest = "54.202.49.38:3253" // stratum host:port
+	stratumDest = "54.202.49.38:3252" // stratum host:port TO RUN DECRED AND STRATUM AT SAME TIME NEED TO CREATE HX.CONF FILE AND ASSIGN HX A NEW PORT
 	coinId = "2081"                // decred database coin id
 
-	// dcrdUser = "yiimprpc"
-	// dcrdPass = "K4YRSkxmqJp4MdeoJvUvQ"
-
-	dcrdUser = "6TrzRqyWHlfTzLpySYOZSTdPM2M="
-	dcrdPass = "vKfmscJ9e0ZCDAVwxZ1oJVf6kgE="
-
+	 dcrdUser = "yiimprpc"
+	 dcrdPass = "K4YRSkxmqJp4MdeoJvUvQ"
+	//certs = /LOCATION TO RPC CERTIFICATE
 	debug = true
 )
 
@@ -49,7 +46,6 @@ func main() {
 				
 				str := bhead.BlockHash().String();
 				args := []string{ stratumDest, coinId, str }
-				log.Printf("calling blocknotify with %s coinid %s hash %s\n", stratumDest, coinId, str);
 				exec.Command("echo \"command\"");
 				out, err := exec.Command(processName, args...).Output()
 				if err != nil {

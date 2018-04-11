@@ -98,7 +98,7 @@ void job_broadcast(YAAMP_JOB *job)
 	timeout.tv_usec = 100000; // max time to push to a socket (very fast)
 
 	YAAMP_JOB_TEMPLATE *templ = job->templ;
-	//debuglog("Job Broadcasting\n");
+	
 	char buffer[YAAMP_SMALLBUFSIZE];
 	job_mining_notify_buffer(job, buffer);
 

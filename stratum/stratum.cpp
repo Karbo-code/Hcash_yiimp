@@ -143,7 +143,6 @@ YAAMP_ALGO g_algos[] =
 	{"blake2s", blake2s_hash, 1, 0 },
 	{"vanilla", blakecoin_hash, 1, 0 },
 	{"decred", decred_hash, 1, 0 },
-	{"hx", decred_hash, 1, 0 },
 
 	{"deep", deep_hash, 1, 0, 0},
 	{"fresh", fresh_hash, 0x100, 0, 0},
@@ -414,7 +413,6 @@ void *stratum_thread(void *p)
 	serv.sin_family = AF_INET;
 	serv.sin_addr.s_addr = htonl(INADDR_ANY);
 	serv.sin_port = htons(g_tcp_port);
-	debuglog("socket %i port %d\n", listen_sock, g_tcp_port);
 	int res = bind(listen_sock, (struct sockaddr*)&serv, sizeof(serv));
 	if(res < 0) yaamp_error("bind");
 

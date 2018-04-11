@@ -102,7 +102,6 @@ static void build_submit_values_decred(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB
 {
 	if (!usegetwork) {
 		// not used yet
-		debuglog("using getwork\n");
 		char doublehash[128] = { 0 };
 
 		sprintf(submitvalues->coinbase, "%s%s%s%s", templ->coinb1, nonce1, nonce2, templ->coinb2);
@@ -120,7 +119,9 @@ static void build_submit_values_decred(YAAMP_JOB_VALUES *submitvalues, YAAMP_JOB
 		string merkleroot = merkle_with_first(templ->txsteps, doublehash);
 
 		ser_string_be(merkleroot.c_str(), submitvalues->merkleroot_be, 8);
-		debuglog("merkle root %s\n", merkleroot.c_str());
+		#ifdef MERKLE_DEBUGLOG
+			printf("merkle root %s\n", merkleroot.c_str());
+		#endif
 
 	}
 	
@@ -270,6 +271,7 @@ static void client_do_submit(YAAMP_CLIENT *client, YAAMP_JOB *job, YAAMP_JOB_VAL
 			memset(hash1, 0, 1024);
 
 			string_be(doublehash2, hash1);
+
 			if(coind->usegetwork && !strcmp("DCR", coind->rpcencoding)) {
 				// no merkle stuff
 				strcpy(hash1, submitvalues->hash_hex);
@@ -473,13 +475,9 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 	YAAMP_JOB_VALUES submitvalues;
 	memset(&submitvalues, 0, sizeof(submitvalues));
 
-	if(is_decred) {
-
+	if(is_decred) 
 		build_submit_values_decred(&submitvalues, templ, client->extranonce1, extranonce2, ntime, nonce, vote, true);
-	}
 	else
-	{
-		debuglog("normie submit\n");
 		build_submit_values(&submitvalues, templ, client->extranonce1, extranonce2, ntime, nonce);
 	}
 
