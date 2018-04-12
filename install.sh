@@ -36,7 +36,6 @@ output ""
    # read -e -p "Set stratum to AutoExchange? i.e. mine any coinf with BTC address? [y/N] : " BTC
   
     read -e -p "Enter your Public IP for admin access (http://www.whatsmyip.org/) : " Public
-    read -e -p "Please enter a new location for /site/adminRights this is to customize the admin entrance url (cannot be admin) : " admin_panel
     # removed for development
     # read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
     # read -e -p "Install UFW and configure ports? [Y/n] : " UFW

@@ -23,10 +23,10 @@ import (
 const (
 	processName = "/var/stratum/blocknotify"    // set the full path if required
 	stratumDest = "54.202.49.38:3252" // stratum host:port TO RUN DECRED AND STRATUM AT SAME TIME NEED TO CREATE HX.CONF FILE AND ASSIGN HX A NEW PORT
-	coinId = "2081"                // decred database coin id
+	coinId = "1307"                // decred database coin id
 
-	 dcrdUser = "yiimprpc"
-	 dcrdPass = "K4YRSkxmqJp4MdeoJvUvQ"
+	 dcrdUser = "ZCu4tC8FZKShqsdowek0h3VL+3s="
+	 dcrdPass = "BPtekEwROh0Mbi3IGTbKKx3klHg="
 	//certs = /LOCATION TO RPC CERTIFICATE
 	debug = true
 )
