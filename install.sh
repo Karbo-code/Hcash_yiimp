@@ -190,7 +190,7 @@ default         0;
     # if [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then option removed. Must always enable auto exchange
     sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/Hcash_yiimp/stratum/Makefile
     # sudo make
-    fi
+    # fi
     sudo make
     cd $HOME/Hcash_yiimp
     sudo cp -r $HOME/Hcash_yiimp/web /var/
