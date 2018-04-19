@@ -1,0 +1,44 @@
+################################################################################
+# Author:   FURams09
+# 
+# Web:      https://golangcode.com/how-to-install-go-in-ubuntu-16-04/
+#
+# Program:
+#   Install go to a new server to prepare it for a new Yiimp installer
+# 
+################################################################################
+
+output() {
+    printf "\E[0;33;40m"
+    echo $1
+    printf "\E[0m"
+}
+
+
+if [ -d "~/.hxd" ]
+then
+    output "Hx is already installed."
+	exit 1
+else
+	output "Hx not installed. Installation continuing."
+	read -e -p "HXD Branch to Build From (default if blank) : " HXDBRANCH
+	read -e -p "HXWALLET Branch to Build From (default if blank) : " HXWALLETBRANCH
+fi
+
+git clone https://github.com/hybridnetwork/hxd $GOPATH/src/github.com/hybridnetwork/hxd
+cd $GOPATH/src/github.com/hybridnetwork/hxd
+
+if [ $HXDBRANCH != ""] 
+then
+	git checkout $HXDBRANCH
+
+fi
+glide install
+go install $(glide nv)
+
+
+
+
+
+output "Installed HXD from $HXDBRANCH"
+output "Installed HXD from $HXWALLETBRANCH"
