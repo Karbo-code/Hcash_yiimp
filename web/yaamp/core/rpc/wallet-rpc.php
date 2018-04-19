@@ -314,7 +314,7 @@ class WalletRPC {
 				$named_params = array(
 					"mixin"=>0,
 					"destinations" => array((object)$destination),
-					"payment_id" => arraySafeVal($params, 2),
+					//"payment_id" => arraySafeVal($params, 2),
 				);
 				$res = $this->rpc_wallet->transfer($named_params);
 				$this->error = $this->rpc_wallet->error;
@@ -346,7 +346,7 @@ class WalletRPC {
 				$named_params = array(
 					"mixin" => arraySafeVal($params, 0, 0),
 					"destinations" => $destinations,
-					"payment_id" => arraySafeVal($params, 3),
+					//"payment_id" => arraySafeVal($params, 3),
 				);
 				$res = $this->rpc_wallet->transfer($named_params);
 				$this->error = $this->rpc_wallet->error;

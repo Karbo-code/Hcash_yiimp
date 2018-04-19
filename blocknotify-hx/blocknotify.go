@@ -14,7 +14,6 @@ import (
 	// "path/filepath"
 
 	"bytes" // dcrd > 0.6+
-	"github.com/hybridnetwork/hxrpcclient"
 
 	rpcclient "github.com/hybridnetwork/hxrpcclient"
 	//"github.com/hybridnetwork/hxutil"
@@ -25,7 +24,7 @@ const (
 	stratumDest = "54.202.49.38:3252" // stratum host:port TO RUN DECRED AND STRATUM AT SAME TIME NEED TO CREATE HX.CONF FILE AND ASSIGN HX A NEW PORT
 	coinId = "1307"                // decred database coin id
 
-	 dcrdUser = "ZCu4tC8FZKShqsdowek0h3VL+3s="
+	 dcrdUser = "ZCu4tC8FZKShqsdowek0h3VLs3s="
 	 dcrdPass = "BPtekEwROh0Mbi3IGTbKKx3klHg="
 	//certs = /LOCATION TO RPC CERTIFICATE
 	debug = true
