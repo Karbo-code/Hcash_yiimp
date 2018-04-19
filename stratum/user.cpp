@@ -108,13 +108,14 @@ void db_add_user(YAAMP_DB *db, YAAMP_CLIENT *client)
 
 	else if(client->userid == 0 && strlen(client->username) >= MIN_ADDRESS_LEN)
 	{
-		db_query(db, "INSERT INTO accounts (username, coinsymbol, balance, donation) values ('%s', '%s', 0, %d)",
+		//hard coding dcr to test payment. miners should set this by passing c=dcr as a password parameter
+		db_query(db, "INSERT INTO accounts (username, coinsymbol, balance, donation) values ('%s', 'dcr', 0, %d)",
 			client->username, symbol, gift);
 		client->userid = (int)mysql_insert_id(&db->mysql);
 	}
 
 	else {
-		db_query(db, "UPDATE accounts SET coinsymbol='%s', swap_time=%u, donation=%d, hostaddr='%s' WHERE id=%d AND balance = 0"
+		db_query(db, "UPDATE accounts SET coinsymbol='dcr', swap_time=%u, donation=%d, hostaddr='%s' WHERE id=%d AND balance = 0"
 			" AND (SELECT COUNT(id) FROM payouts WHERE account_id=%d AND tx IS NULL) = 0" // failed balance
 			" AND (SELECT pending FROM balanceuser WHERE userid=%d ORDER by time DESC LIMIT 1) = 0" // pending balance
 			, symbol, (uint) time(NULL), gift, client->sock->ip, client->userid, client->userid, client->userid);

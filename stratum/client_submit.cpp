@@ -455,6 +455,7 @@ bool client_submit(YAAMP_CLIENT *client, json_value *json_params)
 		if (extranull) {
 			debuglog("extranonce %s is empty!, should be %s - %s\n", extranonce2, extra1_id, client->sock->ip);
 			client_submit_error(client, job, 27, "Invalid extranonce2 suffix", extranonce2, ntime, nonce);
+			//GWP added to see if miners needed this
 			return true;
 		}
 		if (extradiff) {
