@@ -22,11 +22,11 @@ import (
 
 const (
 	processName = "/var/stratum/blocknotify"    // set the full path if required
-	stratumDest = "34.216.11.82:3252" // stratum host:port TO RUN DECRED AND STRATUM AT SAME TIME NEED TO CREATE HX.CONF FILE AND ASSIGN HX A NEW PORT
+	stratumDest = "@HOSTADDR@:3252" // stratum host:port TO RUN DECRED AND STRATUM AT SAME TIME NEED TO CREATE HX.CONF FILE AND ASSIGN HX A NEW PORT
 	coinId = "1307"                // decred database coin id
 
-	 dcrdUser = "ZCu4tC8FZKShqsdowek0h3VLs3s="
-	 dcrdPass = "BPtekEwROh0Mbi3IGTbKKx3klHg="
+	 dcrdUser = "@RPCUSER@"
+	 dcrdPass = "@RPCPASSWORD@"
 	//certs = /LOCATION TO RPC CERTIFICATE
 	debug = true
 )
@@ -72,7 +72,7 @@ func main() {
 	// }
 
 	connCfg := &rpcclient.ConnConfig{
-		Host:         "127.0.0.1:14009",
+		Host:         "127.0.0.1:@RPCPORT@",
 		Endpoint:     "ws", // websocket
 
 		User:         dcrdUser,

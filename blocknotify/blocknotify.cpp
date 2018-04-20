@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 	}
 
 	char buffer[1024];
-	sprintf(buffer, "{\"id\":1,\"method\":\"mining.update_block\",\"params\":[\"x3B2qrNnryRomzGYoI9fYD16dqefTaDZ\",%d,\"%s\"]}\n", coinid, blockhash);
+	sprintf(buffer, "{\"id\":1,\"method\":\"mining.update_block\",\"params\":[\"tu8tu5\",%d,\"%s\"]}\n", coinid, blockhash);
 
 	send(sock, buffer, strlen(buffer), 0);
 	close(sock);

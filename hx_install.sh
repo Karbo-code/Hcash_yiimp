@@ -70,4 +70,4 @@ output "run hxwallet with tags --noservertls --noclienttls when running for yiim
 output ""
 output "run sudo cp sample-hxwallet.conf ~/.hxwallet.conf  from /hxwallet/hxwallet.conf "
 output "You will need to make sure the RPC user and password are the same in hxd.conf and hxwallet.conf"
-output "Any non alphanumeric characters from either the username or password should be replaced with alphanumeric characters. Yiimp doesn't like symbols"
+output "Any non alphanumeric characters from either the username or password should be replaced with alphanumeric characters, except the final = on both. Yiimp doesn't like symbols"
