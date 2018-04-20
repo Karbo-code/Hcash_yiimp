@@ -57,7 +57,7 @@ cd ~/installer
 wget https://storage.googleapis.com/golang/go1.9.1.linux-amd64.tar.gz
 tar xvf go1.9.1.linux-amd64.tar.gz
 
-if [[] "$USERNAME" != "" ]]
+if [ "$USERNAME" != "" ]
 then
 	sudo chown -R $USERNAME:$USERNAME ./go
 else 
@@ -68,7 +68,7 @@ sudo mv go /usr/local
 
 
 
-if [[] "$RSUB" != "Y" ]]
+if [ "$RSUB" != "Y" ]
 then 
 	sudo wget -O /usr/local/bin/rsub https://raw.github.com/aurora/rmate/master/rmate
 	sudo chmod +x /usr/local/bin/rsub
