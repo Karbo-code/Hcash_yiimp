@@ -55,9 +55,6 @@ go install
 
 
 
-
-
-
 output "Installed HXD from $HXDBRANCH"
 output "Installed HXD from $HXWALLETBRANCH"
 output ""

@@ -26,20 +26,18 @@ output "Make sure you double check before hitting enter! Only one shot at these!
 output ""
     output "If you haven't installed GO and Glide yet you must do that before continuing!!!"
     output ""
-    output ""
-    output "Github repo must be installed ~/"
+    output "This will remove any previous version of yiimp that might have been installed!!!"
+    output "Ctl + C now if you don't want to lose it!!!"
     output ""
     output ""
     read -e -p "Enter time zone (e.g. America/New_York) : " TIME
     read -e -p "Server name (no http:// or www. just example.com) : " server_name
     read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
-   # read -e -p "Set stratum to AutoExchange? i.e. mine any coinf with BTC address? [y/N] : " BTC
-  
+    read -e -p "Set stratum to AutoExchange? i.e. mine any coinf with BTC address? [y/N] : " BTC
     read -e -p "Enter your Public IP for admin access (http://www.whatsmyip.org/) : " Public
-    # removed for development
-    # read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
-    # read -e -p "Install UFW and configure ports? [Y/n] : " UFW
-    # read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server prior to running the script!! [Y/n]: " ssl_install
+    read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
+    read -e -p "Install UFW and configure ports? [Y/n] : " UFW
+    read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server prior to running the script!! [Y/n]: " ssl_install
     
     clear 
     output "If you found this helpful, please donate to BTC Donation: 1HUruZMcSben39E27cyLwsTrk6bbWZs3po"
@@ -107,61 +105,61 @@ default         0;
     output "Testing to see if server emails are sent"
     output ""
     if [[ "$root_email" != "" ]]; then
-    echo $root_email > sudo tee --append ~/.email
-    echo $root_email > sudo tee --append ~/.forward
+        echo $root_email > sudo tee --append ~/.email
+        echo $root_email > sudo tee --append ~/.forward
 
-    if [[ ("$send_email" == "y" || "$send_email" == "Y" || "$send_email" == "") ]]; then
-        echo "This is a mail test for the SMTP Service." > sudo tee --append /tmp/email.message
-        echo "You should receive this !" >> sudo tee --append /tmp/email.message
-        echo "" >> sudo tee --append /tmp/email.message
-        echo "Cheers" >> sudo tee --append /tmp/email.message
-        sudo sendmail -s "SMTP Testing" $root_email < sudo tee --append /tmp/email.message
+        if [[ ("$send_email" == "y" || "$send_email" == "Y" || "$send_email" == "") ]]; then
+            echo "This is a mail test for the SMTP Service." > sudo tee --append /tmp/email.message
+            echo "You should receive this !" >> sudo tee --append /tmp/email.message
+            echo "" >> sudo tee --append /tmp/email.message
+            echo "Cheers" >> sudo tee --append /tmp/email.message
+            sudo sendmail -s "SMTP Testing" $root_email < sudo tee --append /tmp/email.message
 
-        sudo rm -f /tmp/email.message
-        echo "Mail sent"
-    fi
+            sudo rm -f /tmp/email.message
+            echo "Mail sent"
+        fi
     fi
     
-    # output "Some optional installs"
-    # if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
-    # sudo aptitude -y install fail2ban
-    # fi
-    # if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-    # sudo apt-get install ufw
-    # sudo ufw default deny incoming
-    # sudo ufw default allow outgoing
-    # sudo ufw allow ssh
-    # sudo ufw allow http
-    # sudo ufw allow https
-    # sudo ufw allow 2142/tcp
-    # sudo ufw allow 3739/tcp
-    # sudo ufw allow 3525/tcp
-    # sudo ufw allow 4233/tcp
-    # sudo ufw allow 3747/tcp
-    # sudo ufw allow 5033/tcp
-    # sudo ufw allow 4262/tcp
-    # sudo ufw allow 3737/tcp
-    # sudo ufw allow 3556/tcp
-    # sudo ufw allow 3553/tcp
-    # sudo ufw allow 4633/tcp
-    # sudo ufw allow 8433/tcp
-    # sudo ufw allow 3555/tcp
-    # sudo ufw allow 3833/tcp
-    # sudo ufw allow 4533/tcp
-    # sudo ufw allow 4133/tcp
-    # sudo ufw allow 5339/tcp
-    # sudo ufw allow 8533/tcp
-    # sudo ufw allow 3334/tcp
-    # sudo ufw allow 4933/tcp
-    # sudo ufw allow 3333/tcp
-    # sudo ufw allow 6033/tcp
-    # sudo ufw allow 5766/tcp
-    # sudo ufw allow 3533/tcp
-    # sudo ufw allow 4033/tcp
-    # sudo ufw allow 3433/tcp
-    # sudo ufw allow 3633/tcp
-    # sudo ufw --force enable    
-    # fi
+    output "Some optional installs"
+    if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
+    sudo aptitude -y install fail2ban
+    fi
+    if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
+    sudo apt-get install ufw
+    sudo ufw default deny incoming
+    sudo ufw default allow outgoing
+    sudo ufw allow ssh
+    sudo ufw allow http
+    sudo ufw allow https
+    sudo ufw allow 2142/tcp
+    sudo ufw allow 3739/tcp
+    sudo ufw allow 3525/tcp
+    sudo ufw allow 4233/tcp
+    sudo ufw allow 3747/tcp
+    sudo ufw allow 5033/tcp
+    sudo ufw allow 4262/tcp
+    sudo ufw allow 3737/tcp
+    sudo ufw allow 3556/tcp
+    sudo ufw allow 3553/tcp
+    sudo ufw allow 4633/tcp
+    sudo ufw allow 8433/tcp
+    sudo ufw allow 3555/tcp
+    sudo ufw allow 3833/tcp
+    sudo ufw allow 4533/tcp
+    sudo ufw allow 4133/tcp
+    sudo ufw allow 5339/tcp
+    sudo ufw allow 8533/tcp
+    sudo ufw allow 3334/tcp
+    sudo ufw allow 4933/tcp
+    sudo ufw allow 3333/tcp
+    sudo ufw allow 6033/tcp
+    sudo ufw allow 5766/tcp
+    sudo ufw allow 3533/tcp
+    sudo ufw allow 4033/tcp
+    sudo ufw allow 3433/tcp
+    sudo ufw allow 3633/tcp
+    sudo ufw --force enable    
+    fi
     
     clear
     output "Installing phpmyadmin"
@@ -173,7 +171,7 @@ default         0;
     echo "phpmyadmin phpmyadmin/mysql/app-pass password $AUTOGENERATED_PASS" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/app-password-confirm password $AUTOGENERATED_PASS" | sudo debconf-set-selections
     sudo aptitude -y install phpmyadmin
-	
+    
     output " Installing Yiimp"
     output ""
     output ""
@@ -181,29 +179,52 @@ default         0;
     blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
     cd ~
     cd $HOME/Hcash_yiimp/blocknotify
+    sudo rm -rf blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     sudo make
     cd $HOME/Hcash_yiimp/stratum/iniparser
+    sudo rm -rf iniparser
     sudo make
+
+
+
+
     cd $HOME/Hcash_yiimp/stratum
-    # if [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then option removed. Must always enable auto exchange
+    sudo rm -rf stratum
+
+    if [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then
     sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/Hcash_yiimp/stratum/Makefile
-    # sudo make
-    # fi
     sudo make
+    fi
+
+    sudo make
+
+    #UNINSTALLING OLD YIIMP
+    sudo rm -rf /var/stratum
+    sudo rm -rf /bin/yiimp
+    sudo rm -rf /etc/yiimp
+    sudo rm -rf /$HOME/backup/
+
     cd $HOME/Hcash_yiimp
+
     sudo cp -r $HOME/Hcash_yiimp/web /var/
+
     sudo mkdir -p /var/stratum
     cd $HOME/Hcash_yiimp/stratum
+
     sudo cp -a config.sample/. /var/stratum/config
-sudo cp -r stratum /var/stratum
-sudo cp -r run.sh /var/stratum
-cd $HOME/Hcash_yiimp
-sudo cp -a $HOME/Hcash_yiimp/bin/. /bin/
-sudo cp -r $HOME/Hcash_yiimp/blocknotify/blocknotify /var/stratum
-sudo mkdir -p /etc/yiimp
-sudo mkdir -p /$HOME/backup/
-#fixing yiimp
+    sudo cp -r stratum /var/stratum
+    sudo cp -r run.sh /var/stratum
+    
+    cd $HOME/Hcash_yiimp
+
+    sudo cp -a $HOME/Hcash_yiimp/bin/. /bin/
+    sudo cp -r $HOME/Hcash_yiimp/blocknotify/blocknotify /var/stratum
+
+
+    sudo mkdir -p /etc/yiimp
+    sudo mkdir -p /$HOME/backup/
+    #fixing yiimp
     sed -i "s|ROOTDIR=/data/yiimp|ROOTDIR=/var|g" /bin/yiimp
     #fixing run.sh
     sudo rm -r /var/stratum/config/run.sh
@@ -231,12 +252,13 @@ sudo chmod +x /var/stratum/config/run.sh
     clear
     output "Making Web Server Magic Happen!"
     # adding user to group, creating dir structure, setting permissions
+      sudo rm -rf /var/www/$server_name/html 
       sudo mkdir -p /var/www/$server_name/html  
     output "Creating webserver initial config file"
     output ""
 echo 'include /etc/nginx/blockuseragents.rules;
-	server {
-	if ($blockedagent) {
+    server {
+    if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -263,7 +285,7 @@ echo 'include /etc/nginx/blockuseragents.rules;
         error_log  /var/log/nginx/'"${server_name}"'.app-error.log error;
     
         # allow larger file uploads and longer script runtimes
- 	client_body_buffer_size  50k;
+    client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -281,33 +303,33 @@ echo 'include /etc/nginx/blockuseragents.rules;
             fastcgi_connect_timeout 300;
             fastcgi_send_timeout 300;
             fastcgi_read_timeout 300;
-	    try_files $uri $uri/ =404;
+        try_files $uri $uri/ =404;
         }
-		location ~ \.php$ {
-        	return 404;
+        location ~ \.php$ {
+            return 404;
         }
-		location ~ \.sh {
-		return 404;
+        location ~ \.sh {
+        return 404;
         }
-		location ~ /\.ht {
-		deny all;
+        location ~ /\.ht {
+        deny all;
         }
-		location ~ /.well-known {
-		allow all;
+        location ~ /.well-known {
+        allow all;
         }
-		location /phpmyadmin {
-  		root /usr/share/;
-  		index index.php;
-  		try_files $uri $uri/ =404;
-  		location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-    		deny all;
-  	}
-  		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-    		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    		include fastcgi_params;
-    		include snippets/fastcgi-php.conf;
-  	}
+        location /phpmyadmin {
+        root /usr/share/;
+        index index.php;
+        try_files $uri $uri/ =404;
+        location ~ ^/phpmyadmin/(doc|sql|setup)/ {
+            deny all;
+    }
+        location ~ /phpmyadmin/(.+\.php)$ {
+            fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+            include snippets/fastcgi-php.conf;
+    }
  }
  }
 ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
@@ -315,129 +337,130 @@ echo 'include /etc/nginx/blockuseragents.rules;
 sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
 sudo ln -s /var/web /var/www/$server_name/html
 sudo service nginx restart
-	#Removed for Development
-#     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
-#     output "Install LetsEncrypt and setting SSL"
-#     sudo aptitude -y install letsencrypt
-#     sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name" -d www."$server_name"
-#     sudo rm /etc/nginx/sites-available/$server_name.conf
-#     sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-#     # I am SSL Man!
-# echo 'include /etc/nginx/blockuseragents.rules;
-# 	server {
-# 	if ($blockedagent) {
-#                 return 403;
-#         }
-#         if ($request_method !~ ^(GET|HEAD|POST)$) {
-#         return 444;
-#         }
-#         listen 80;
-#         listen [::]:80;
-#         server_name '"${server_name}"';
-#     	# enforce https
-#         return 301 https://$server_name$request_uri;
-# 	}
-	
-# 	server {
-# 	if ($blockedagent) {
-#                 return 403;
-#         }
-#         if ($request_method !~ ^(GET|HEAD|POST)$) {
-#         return 444;
-#         }
-#             listen 443 ssl http2;
-#             listen [::]:443 ssl http2;
-#             server_name '"${server_name}"' www.'"${server_name}"';
+
+    if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
+    output "Install LetsEncrypt and setting SSL"
+    sudo aptitude -y install letsencrypt
+    sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name" -d www."$server_name"
+    sudo rm /etc/nginx/sites-available/$server_name.conf
+    sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+    # I am SSL Man!
+echo 'include /etc/nginx/blockuseragents.rules;
+    server {
+    if ($blockedagent) {
+                return 403;
+        }
+        if ($request_method !~ ^(GET|HEAD|POST)$) {
+        return 444;
+        }
+        listen 80;
+        listen [::]:80;
+        server_name '"${server_name}"';
+        # enforce https
+        return 301 https://$server_name$request_uri;
+    }
+    
+    server {
+    if ($blockedagent) {
+                return 403;
+        }
+        if ($request_method !~ ^(GET|HEAD|POST)$) {
+        return 444;
+        }
+            listen 443 ssl http2;
+            listen [::]:443 ssl http2;
+            server_name '"${server_name}"' www.'"${server_name}"';
         
-#             root /var/www/'"${server_name}"'/html/web;
-#             index index.php;
+            root /var/www/'"${server_name}"'/html/web;
+            index index.php;
         
-#             access_log /var/log/nginx/'"${server_name}"'.app-accress.log;
-#             error_log  /var/log/nginx/'"${server_name}"'.app-error.log error;
+            access_log /var/log/nginx/'"${server_name}"'.app-accress.log;
+            error_log  /var/log/nginx/'"${server_name}"'.app-error.log error;
         
-#             # allow larger file uploads and longer script runtimes
-#  	client_body_buffer_size  50k;
-#         client_header_buffer_size 50k;
-#         client_max_body_size 50k;
-#         large_client_header_buffers 2 50k;
-#         sendfile off;
+            # allow larger file uploads and longer script runtimes
+    client_body_buffer_size  50k;
+        client_header_buffer_size 50k;
+        client_max_body_size 50k;
+        large_client_header_buffers 2 50k;
+        sendfile off;
         
-#             # strengthen ssl security
-#             ssl_certificate /etc/letsencrypt/live/'"${server_name}"'/fullchain.pem;
-#             ssl_certificate_key /etc/letsencrypt/live/'"${server_name}"'/privkey.pem;
-#             ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-#             ssl_prefer_server_ciphers on;
-#             ssl_session_cache shared:SSL:10m;
-#             ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";
-#             ssl_dhparam /etc/ssl/certs/dhparam.pem;
+            # strengthen ssl security
+            ssl_certificate /etc/letsencrypt/live/'"${server_name}"'/fullchain.pem;
+            ssl_certificate_key /etc/letsencrypt/live/'"${server_name}"'/privkey.pem;
+            ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+            ssl_prefer_server_ciphers on;
+            ssl_session_cache shared:SSL:10m;
+            ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4";
+            ssl_dhparam /etc/ssl/certs/dhparam.pem;
         
-#             # Add headers to serve security related headers
-#             add_header Strict-Transport-Security "max-age=15768000; preload;";
-#             add_header X-Content-Type-Options nosniff;
-#             add_header X-XSS-Protection "1; mode=block";
-#             add_header X-Robots-Tag none;
-#             add_header Content-Security-Policy "frame-ancestors 'self'";
+            # Add headers to serve security related headers
+            add_header Strict-Transport-Security "max-age=15768000; preload;";
+            add_header X-Content-Type-Options nosniff;
+            add_header X-XSS-Protection "1; mode=block";
+            add_header X-Robots-Tag none;
+            add_header Content-Security-Policy "frame-ancestors 'self'";
         
-#         location / {
-#         try_files $uri $uri/ /index.php?$args;
-#         }
-#         location @rewrite {
-#         rewrite ^/(.*)$ /index.php?r=$1;
-#         }
+        location / {
+        try_files $uri $uri/ /index.php?$args;
+        }
+        location @rewrite {
+        rewrite ^/(.*)$ /index.php?r=$1;
+        }
     
         
-#             location ~ ^/index\.php$ {
-#                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-#                 fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
-#                 fastcgi_index index.php;
-#                 include fastcgi_params;
-#                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-#                 fastcgi_intercept_errors off;
-#                 fastcgi_buffer_size 16k;
-#                 fastcgi_buffers 4 16k;
-#                 fastcgi_connect_timeout 300;
-#                 fastcgi_send_timeout 300;
-#                 fastcgi_read_timeout 300;
-#                 include /etc/nginx/fastcgi_params;
-# 	    	try_files $uri $uri/ =404;
-#         }
-# 		location ~ \.php$ {
-#         	return 404;
-#         }
-# 		location ~ \.sh {
-# 		return 404;
-#         }
+            location ~ ^/index\.php$ {
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+                fastcgi_index index.php;
+                include fastcgi_params;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                fastcgi_intercept_errors off;
+                fastcgi_buffer_size 16k;
+                fastcgi_buffers 4 16k;
+                fastcgi_connect_timeout 300;
+                fastcgi_send_timeout 300;
+                fastcgi_read_timeout 300;
+                include /etc/nginx/fastcgi_params;
+            try_files $uri $uri/ =404;
+        }
+        location ~ \.php$ {
+            return 404;
+        }
+        location ~ \.sh {
+        return 404;
+        }
         
-#             location ~ /\.ht {
-#                 deny all;
-#             }
-# 	    location /phpmyadmin {
-#   		root /usr/share/;
-#   		index index.php;
-#   		try_files $uri $uri/ =404;
-#   		location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-#     		deny all;
-#   	}
-#   		location ~ /phpmyadmin/(.+\.php)$ {
-#     		fastcgi_pass unix:/run/php/php7.0-fpm.sock;
-#     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-#     		include fastcgi_params;
-#     		include snippets/fastcgi-php.conf;
-#   	}
-#  }
-#  }
+            location ~ /\.ht {
+                deny all;
+            }
+        location /phpmyadmin {
+        root /usr/share/;
+        index index.php;
+        try_files $uri $uri/ =404;
+        location ~ ^/phpmyadmin/(doc|sql|setup)/ {
+            deny all;
+    }
+        location ~ /phpmyadmin/(.+\.php)$ {
+            fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include fastcgi_params;
+            include snippets/fastcgi-php.conf;
+    }
+ }
+ }
         
-# ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
-# 	fi
+' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
+    fi
 sudo service nginx restart
 sudo service php7.0-fpm reload
     clear
     output "Now for the database fun!"
     # create database
+    Q0="DROP DATABASE IF EXISTS yiimpfrontend;"
     Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend;"
     Q2="GRANT ALL ON *.* TO 'panel'@'localhost' IDENTIFIED BY '$password';"
     Q3="FLUSH PRIVILEGES;"
-    SQL="${Q1}${Q2}${Q3}"
+    SQL="${Q0}${Q1}${Q2}${Q3}"
     sudo mysql -u root -p="" -e "$SQL"
     # create stratum user
     Q1="GRANT ALL ON *.* TO 'stratum'@'localhost' IDENTIFIED BY '$password2';"
@@ -553,7 +576,7 @@ define('"'"'YAAMP_ADMIN_EMAIL'"'"', '"'"''"${EMAIL}"''"'"');
 define('"'"'YAAMP_ADMIN_IP'"'"', '"'"''"${Public}"''"'"'); // samples: "80.236.118.26,90.234.221.11" or "10.0.0.1/8"
 define('"'"'YAAMP_ADMIN_WEBCONSOLE'"'"', true);
 define('"'"'YAAMP_NOTIFY_NEW_COINS'"'"', true);
-define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'blake256'"'"');
+define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'decred'"'"');
 define('"'"'YAAMP_USE_NGINX'"'"', true);
 // Exchange public keys (private keys are in a separate config file)
 define('"'"'EXCH_CRYPTOPIA_KEY'"'"', '"'"''"'"');
@@ -579,7 +602,7 @@ define('"'"'NICEHASH_API_ID'"'"','"'"'9205'"'"');
 define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3J9tapPoFCtouAZH7Th8HAPsD8aoykEHzk'"'"');
 define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
 $cold_wallet_table = array(
-	'"'"'1KuE2LMZMPXJ4gsVniWLuyyPsqqZs5Av4y'"'"' => 0.10,
+    '"'"'1KuE2LMZMPXJ4gsVniWLuyyPsqqZs5Av4y'"'"' => 0.10,
 );
 // Sample fixed pool fees
 $configFixedPoolFees = array(
@@ -589,11 +612,11 @@ $configFixedPoolFees = array(
 );
 // Sample custom stratum ports
 $configCustomPorts = array(
-//	'"'"'x11'"'"' => 7000,
+//  '"'"'x11'"'"' => 7000,
 );
 // mBTC Coefs per algo (default is 1.0)
 $configAlgoNormCoef = array(
-//	'"'"'x11'"'"' => 5.0,
+//  '"'"'x11'"'"' => 5.0,
 );
 ' | sudo -E tee /var/web/serverconfig.php >/dev/null 2>&1
 
