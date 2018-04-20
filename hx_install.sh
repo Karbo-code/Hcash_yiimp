@@ -36,8 +36,8 @@ then
 
 fi
 
-#glide install
-#go install $(glide nv)
+glide install
+go install $(glide nv)
 
 
 sudo rm -rf $GOPATH/src/github.com/hybridnetwork/hxwallet

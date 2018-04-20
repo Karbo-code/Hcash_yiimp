@@ -20,10 +20,12 @@ then
     output "Go is already installed. Make sure these lines are added added to your .profile or .bash-rc file"
     output "export GOPATH=\$HOME/go"
 	output "export PATH=\$PATH:/usr/local/go/bin:\$GOPATH/bin"
+	output ""
+	output "then run the following command"
 	output "source /.profile"
 	output ""
 	output ""
-	output "Make sure glide is installed as well"
+	output "Once Go is installed, make sure glide is installed as well"
 	output "go get -u github.com/Masterminds/glide"
 
 	exit 1
