@@ -140,9 +140,12 @@ YAAMP_ALGO g_algos[] =
 	{"bastion", bastion_hash, 1, 0 },
 	{"blake", blake_hash, 1, 0 },
 	{"blakecoin", blakecoin_hash, 1 /*0x100*/, 0, sha256_hash_hex },
+    {"hcash-blake", blakecoin_hash, 1 /*0x100*/, 0, sha256_hash_hex },
 	{"blake2s", blake2s_hash, 1, 0 },
 	{"vanilla", blakecoin_hash, 1, 0 },
 	{"decred", decred_hash, 1, 0 },
+    {"hcash", decred_hash, 1, 0 },
+    {"hcash-dcrd", decred_hash, 1, 0 },
 
 	{"deep", deep_hash, 1, 0, 0},
 	{"fresh", fresh_hash, 0x100, 0, 0},

@@ -1,0 +1,6 @@
+package: .
+import:
+- package: github.com/HcashOrg/hcrpcclient
+- package: github.com/HcashOrg/hcd
+  subpackages:
+  - wire

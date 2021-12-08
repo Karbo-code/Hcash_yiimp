@@ -1,0 +1,60 @@
+hash: cba564933d3e9182251636077b86dadb31f98fe40e6527013277eb248fb4fc69
+updated: 2018-04-11T23:56:57.456118415-04:00
+imports:
+- name: github.com/agl/ed25519
+  version: 5312a61534124124185d41f09206b9fef1d88403
+  subpackages:
+  - edwards25519
+- name: github.com/btcsuite/btclog
+  version: 84c8d2346e9fc8c7b947e243b9c24e6df9fd206a
+- name: github.com/btcsuite/go-socks
+  version: 4720035b7bfd2a9bb130b1c184f8bbe41b6f0d0f
+  subpackages:
+  - socks
+- name: github.com/btcsuite/websocket
+  version: 31079b6807923eb23992c421b114992b95131b55
+- name: github.com/dchest/blake256
+  version: dee3fe6eb0e98dc774a94fc231f85baf7c29d360
+- name: github.com/decred/dcrd
+  version: fd99f572cfd52ca722ad501ccb34acdcb22b4a67
+  subpackages:
+  - rpcclient
+  - wire
+- name: github.com/hybridnetwork/bliss
+  version: d4ac50e0aab7cac32202e87d7cee03e65155cf7d
+  subpackages:
+  - huffman
+  - params
+  - poly
+  - sampler
+- name: github.com/hybridnetwork/hxd
+  version: b96aad62e89052089ab932e949b929756fd8b557
+  subpackages:
+  - blockchain/stake
+  - blockchain/stake/internal/dbnamespace
+  - blockchain/stake/internal/ticketdb
+  - blockchain/stake/internal/tickettreap
+  - chaincfg
+  - chaincfg/chainec
+  - chaincfg/chainhash
+  - crypto
+  - crypto/bliss
+  - database
+  - dcrec/edwards
+  - dcrec/secp256k1
+  - dcrec/secp256k1/schnorr
+  - dcrjson
+  - txscript
+  - wire
+- name: github.com/hybridnetwork/hxrpcclient
+  version: ffd2b9e752f9864a1b34ef1abcac8d9937769656
+- name: github.com/hybridnetwork/hxutil
+  version: db53d84b83d06ba2b133a7c7704ad4e173ac8d5d
+  subpackages:
+  - base58
+- name: golang.org/x/crypto
+  version: d6449816ce06963d9d136eee5a56fca5b0616e7e
+  subpackages:
+  - ripemd160
+  - sha3
+testImports: []
