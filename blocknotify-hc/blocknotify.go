@@ -23,8 +23,8 @@ const (
 	stratumDest = "@HOSTADDR@:3254"
 	coinId = "@COINID@"                // hx database coin id
 
-	 dcrdUser = "@RPCUSER@"
-	 dcrdPass = "@RPCPASSWORD@"
+	 hcUser = "@RPCUSER@"
+	 hcPass = "@RPCPASSWORD@"
 	//certs = /LOCATION TO RPC CERTIFICATE
 	debug = true
 )
@@ -73,8 +73,8 @@ func main() {
 		Host:         "127.0.0.1:@RPCPORT@",
 		Endpoint:     "ws", // websocket
 
-		User:         dcrdUser,
-		Pass:         dcrdPass,
+		User:         hcUser,
+		Pass:         hcPass,
 
 		DisableTLS: true,
 	}
