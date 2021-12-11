@@ -3,8 +3,6 @@
 // Sample blocknotify wrapper tool compatible with decred notifications
 // will call the standard bin/blocknotify yiimp tool on new block event.
 
-// Note: this tool is connected directly to dcrd, not to the wallet!
-
 package main
 
 import (
@@ -21,7 +19,7 @@ import (
 )
 
 const (
-	processName = "/var/stratum/blocknotify"    // set the full path if required
+	processName = "/var/stratum/blocknotify-hc"    // set the full path if required
 	stratumDest = "@HOSTADDR@:3254"
 	coinId = "@COINID@"                // hx database coin id
 
