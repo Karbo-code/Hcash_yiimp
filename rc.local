@@ -45,7 +45,7 @@ screen -dmS debug tail -f $LOG_DIR/debug.log
 #screen -dmS penta $STRATUM_DIR/run.sh penta
 #screen -dmS quark $STRATUM_DIR/run.sh quark
 #screen -dmS qubit $STRATUM_DIR/run.sh qubit
-screen -dmS jha $STRATUM_DIR/run.sh jha
+#screen -dmS jha $STRATUM_DIR/run.sh jha
 #screen -dmS dmd-gr $STRATUM_DIR/run.sh dmd-gr
 #screen -dmS myr-gr $STRATUM_DIR/run.sh myr-gr
 #screen -dmS lbry $STRATUM_DIR/run.sh lbry
@@ -58,7 +58,7 @@ screen -dmS jha $STRATUM_DIR/run.sh jha
 #screen -dmS blake2s $STRATUM_DIR/run.sh blake2s
 #screen -dmS vanilla $STRATUM_DIR/run.sh vanilla # blake 8
 #screen -dmS decred $STRATUM_DIR/run.sh decred # blake 14
-screen -dmS hcash-dcrd $STRATUM_DIR/run.sh hcash-dcrd # blake 14
+#screen -dmS hcash-dcrd $STRATUM_DIR/run.sh hcash-dcrd # blake 14
 
 #screen -dmS keccak $STRATUM_DIR/run.sh keccak
 #screen -dmS keccakc $STRATUM_DIR/run.sh keccakc
